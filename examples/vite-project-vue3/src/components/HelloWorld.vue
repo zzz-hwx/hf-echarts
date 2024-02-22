@@ -6,11 +6,14 @@
   </div>
 
   <div>bool: {{ bool }}</div>
+
+  <hf-chart></hf-chart>
 </template>
 
 <script setup lang="ts">
 import { ref } from 'vue'
 import { isArray } from '@hf/shared';
+import HfChart from '@hf/echarts';
 
 defineProps<{ msg: string }>()
 
