@@ -1,0 +1,26 @@
+{
+  "name": "vite-vue2",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@hf/echarts": "workspace:^1.0.0",
+    "@hf/shared": "workspace:^1.0.0"
+  },
+  "devDependencies": {
+    "@vue/composition-api": "^1.7.2",
+    "vite": "^4.3.2",
+    "vite-plugin-vue2": "^2.0.3",
+    "vue": "^2.6.12",
+    "vue-template-compiler": "^2.7.14"
+  },
+  "peerDependencies": {
+    "@vue/composition-api": "^1.0.5",
+    "vue": ">= 2.5 < 2.7"
+  }
+}

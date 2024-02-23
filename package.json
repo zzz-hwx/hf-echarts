@@ -8,8 +8,8 @@
     "build": "vue-tsc --noEmit && vite build",
     "lint": "eslint --fix --ext .ts,.vue --no-error-on-unmatched-pattern .",
     "release": "standard-version && git push --follow-tags && npm publish",
-    "example:dev:2": "npm run use-vue:2 && npm -C ../vite-project-vue2 run dev",
-    "example:dev:3": "npm run use-vue:3 && npm -C examples/vite-project-vue3 run dev",
+    "example:dev:2": "npm run use-vue:2 && npm -C examples/cli-vue2 run serve",
+    "example:dev:3": "npm run use-vue:3 && npm -C examples/vite-vue3 run dev",
     "use-vue:2": "vue-demi-switch 2 vue2",
     "use-vue:3": "vue-demi-switch 3",
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -35,11 +35,11 @@
     "vite": "^5.1.4",
     "vue": "^3.4.19",
     "vue-tsc": "^1.8.27",
-    "vue2": "npm:vue@^2.7.14"
+    "vue2": "npm:vue@^2.6.12"
   },
   "peerDependencies": {
     "@vue/composition-api": "^1.0.5",
-    "vue": "^2.6.12 || ^3.1.1"
+    "vue": ">= 2.5 < 2.7 || ^3.1.1"
   },
   "peerDependenciesMeta": {
     "@vue/composition-api": {
