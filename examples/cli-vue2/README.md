@@ -1,19 +1,14 @@
 # cli-vue2
 
-## Project setup
+## 项目运行
+
+依赖安装
 ```
 pnpm install
 ```
 
-### Compiles and hot-reloads for development
+开发: 编译 + 热加载
 ```
-pnpm run serve
+cd ../../
+pnpm run example:dev:2
 ```
-
-### Compiles and minifies for production
-```
-pnpm run build
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).

@@ -4,17 +4,17 @@
     <div class="card">
       <button type="button" @click="count++">count is {{ count }}</button>
     </div>
-    <!-- <hf-chart></hf-chart> -->
+    <hf-chart></hf-chart>
   </div>
 </template>
 
 <script>
-// import HfChart from '@hf/echarts';
+import HfChart from '@hf/echarts';
 
 export default {
   name: 'HelloWorld',
   components: {
-    // HfChart
+    HfChart
   },
   props: {
     msg: String

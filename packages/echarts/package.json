@@ -2,11 +2,27 @@
   "name": "@hf/echarts",
   "version": "1.0.0",
   "description": "",
-  "main": "index.ts",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+  "main": "index.js",
+  "module": "dist/echarts.esm-bundler.js",
+  "unpkg": "dist/echarts.global.js",
+  "jsdelivr": "dist/reactivity.global.js",
+  "files": [
+    "index.js",
+    "dist"
+  ],
+  "sideEffects": false,
+  "buildOptions": {
+    "name": "HfEcharts",
+    "formats": [
+      "cjs",
+      "esm-bundler",
+      "global"
+    ]
   },
-  "keywords": [],
+  "keywords": [
+    "echarts",
+    "vue"
+  ],
   "author": "",
   "license": "ISC",
   "dependencies": {

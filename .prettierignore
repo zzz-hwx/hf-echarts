@@ -1,4 +1,4 @@
 dist
-# *.md
-# *.html
+*.md
+*.html
 pnpm-lock.yaml
