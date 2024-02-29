@@ -52,7 +52,8 @@ const packageFormats = packageOptions.formats || defaultFormats;
 // 打包
 function createConfig(format, output) {
   const entryFile = 'src/index.ts'; // 入口文件
-  output.sourcemap = !!process.env.SOURCE_MAP
+  output.sourcemap = !!process.env.SOURCE_MAP;
+  const external = packageOptions.external || [];
 
   // 生成rollup配置
   return {
@@ -65,13 +66,14 @@ function createConfig(format, output) {
         'vue-demi': 'vueDemi',
       },
     },
-    external: ['vue', 'vue-demi'],
+    // external: ['vue', 'vue-demi'],
+    external,
     plugins: [
       json(),
       // 先解析ts
       esbuild({
         tsconfig: path.resolve(__dirname, 'tsconfig.json'),
-        sourcemap: output.sourcemap
+        sourcemap: output.sourcemap,
       }),
       // 再解析第三方模块
       nodeResolve(),

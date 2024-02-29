@@ -67,6 +67,17 @@ npm run example:dev:2
 npm run build
 ```
 
+### buildOptions
+
+`packages/xx/package.json`.buildOptions说明
+
+| 配置项   | 说明                        | 参考值                           |
+| -------- | --------------------------- | -------------------------------- |
+| name     | 对应rollup配置`output.name` | HfEcharts                        |
+| filename | 文件名，默认文件夹名称      | echarts                          |
+| formats  | 打包的类型                  | ["cjs", "esm-bundler", "global"] |
+| external | 对应rollup配置`external`    | ["vue-demi", "echarts/core"]     |
+
 ## 测试
 
 根目录 项目运行：`npm run example:dev:3`

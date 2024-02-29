@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "module": "dist/echarts.esm-bundler.js",
+  "types": "dist/echarts.d.ts",
   "unpkg": "dist/echarts.global.js",
   "jsdelivr": "dist/reactivity.global.js",
   "files": [
@@ -17,6 +18,11 @@
       "cjs",
       "esm-bundler",
       "global"
+    ],
+    "external": [
+      "vue-demi",
+      "echarts/core",
+      "resize-detector"
     ]
   },
   "keywords": [
