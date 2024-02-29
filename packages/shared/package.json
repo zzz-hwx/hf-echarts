@@ -4,6 +4,7 @@
   "description": "internal utils shared across @hf packages",
   "main": "index.js",
   "module": "dist/shared.esm-bundler.js",
+  "types": "dist/shared.d.ts",
   "files": [
     "index.js",
     "dist"

@@ -4,9 +4,14 @@ import {
   type ECElementEvent,
   type ElementEvent,
 } from 'echarts/core';
-import type { Ref } from 'vue-demi';
+import type { MaybeRef, Ref } from 'vue-demi';
 
-export type Injection<T> = T | null | Ref<T | null> | { value: T | null };
+export type Injection<T> =
+  | T
+  | null
+  | Ref<T | null>
+  | MaybeRef<T | null>
+  | { value: T | null };
 
 type InitType = typeof init;
 export type InitParameters = Parameters<InitType>;
@@ -20,7 +25,7 @@ export type UpdateOptions = SetOptionOpts;
 export type UpdateOptionsInjection = Injection<UpdateOptions>;
 
 export type EChartsType = ReturnType<InitType>;
-type ZRenderType = ReturnType<EChartsType["getZr"]>;
+type ZRenderType = ReturnType<EChartsType['getZr']>;
 export type EventTarget = EChartsType | ZRenderType;
 type SetOptionType = EChartsType['setOption'];
 export type Option = Parameters<SetOptionType>[0];
