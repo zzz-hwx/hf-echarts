@@ -1,10 +1,14 @@
 <template>
-  <HelloWorld msg="Vite + Vue3" />
+  <menu-container></menu-container>
 </template>
 
-<script setup lang="ts">
-import HelloWorld from './components/HelloWorld.vue'
+<script lang="ts" setup>
+import MenuContainer from '@/components/menu/menu-container.vue';
 </script>
 
-
-<style scoped></style>
+<style lang="scss">
+* {
+  margin: 0;
+  padding: 0;
+}
+</style>

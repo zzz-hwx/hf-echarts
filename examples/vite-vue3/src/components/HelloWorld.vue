@@ -7,13 +7,15 @@
 
   <div>bool: {{ bool }}</div>
 
-  <hf-chart></hf-chart>
+  <el-button>按钮呀</el-button>
+
+  <!-- <hf-chart></hf-chart> -->
 </template>
 
 <script setup lang="ts">
 import { ref } from 'vue'
 import { isArray } from '@hf/shared';
-import HfChart from '@hf/echarts';
+// import HfChart from '@hf/echarts';
 
 defineProps<{ msg: string }>()
 
