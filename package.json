@@ -4,7 +4,7 @@
   "type": "module",
   "scripts": {
     "dev": "npm run example:dev:3",
-    "build": "node scripts/build.js",
+    "build": "node scripts/build.js && npm run build-dts",
     "build-dts": "tsc -p tsconfig.build.json && rollup -c rollup.dts.config.js",
     "lint": "eslint --fix --ext .ts,.vue --no-error-on-unmatched-pattern .",
     "release": "standard-version && git push --follow-tags && npm publish",

@@ -6,7 +6,7 @@
   "module": "dist/echarts.esm-bundler.js",
   "types": "dist/echarts.d.ts",
   "unpkg": "dist/echarts.global.js",
-  "jsdelivr": "dist/reactivity.global.js",
+  "jsdelivr": "dist/echarts.global.js",
   "files": [
     "index.js",
     "dist"

@@ -39,6 +39,7 @@ const outputConfigs = {
   cjs: {
     file: resolve(`dist/${name}.cjs.js`),
     format: 'cjs',
+    exports: 'named',
   },
   global: {
     file: resolve(`dist/${name}.global.js`),
@@ -62,8 +63,10 @@ function createConfig(format, output) {
       ...output,
       name: packageOptions.name,
       globals: {
-        vue: 'Vue',
+        vue: 'vue',
         'vue-demi': 'vueDemi',
+        'echarts/core': 'echarts/core',
+        'resize-detector': 'resizeDetector',
       },
     },
     // external: ['vue', 'vue-demi'],

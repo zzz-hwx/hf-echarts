@@ -38,6 +38,9 @@ import {
 } from './composables';
 import { init as initChart } from 'echarts/core';
 
+// 绕过 tsc 导出到temp下没有包含css文件
+// import './style.css';
+
 const wcRegistered = register();
 
 
@@ -298,6 +301,8 @@ export default defineComponent({
     ) as any;
     attrs.ref = 'root';
     attrs.class = attrs.class ? ['echarts'].concat(attrs.class) : 'echarts';
+    // 绕过 tsc 导出到temp下没有包含css文件
+    attrs.style = 'display: block; width: 100%; height: 100%; min-width: 0;';
     return h(TAG_NAME, attrs, '一行文字呀');
   },
 });
