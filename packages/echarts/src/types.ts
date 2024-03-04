@@ -1,17 +1,8 @@
-import {
-  init,
-  type SetOptionOpts,
-  type ECElementEvent,
-  type ElementEvent,
-} from 'echarts/core';
-import type { MaybeRef, Ref } from 'vue-demi';
+import { init } from 'echarts/core';
+import type { SetOptionOpts, ECElementEvent, ElementEvent } from 'echarts';
+import type { Ref } from 'vue';
 
-export type Injection<T> =
-  | T
-  | null
-  | Ref<T | null>
-  | MaybeRef<T | null>
-  | { value: T | null };
+export type Injection<T> = T | null | Ref<T | null> | { value: T | null };
 
 type InitType = typeof init;
 export type InitParameters = Parameters<InitType>;
@@ -27,27 +18,48 @@ export type UpdateOptionsInjection = Injection<UpdateOptions>;
 export type EChartsType = ReturnType<InitType>;
 type ZRenderType = ReturnType<EChartsType['getZr']>;
 export type EventTarget = EChartsType | ZRenderType;
+
 type SetOptionType = EChartsType['setOption'];
 export type Option = Parameters<SetOptionType>[0];
 
-type ElementEventName =
+export type LoadingOptions = {
+  text?: string;
+  textColor?: string;
+  fontSize?: number | string;
+  fontWeight?: number | string;
+  fontStyle?: string;
+  fontFamily?: string;
+  maskColor?: string;
+  showSpinner?: boolean;
+  color?: string;
+  spinnerRadius?: number;
+  lineWidth?: number;
+  zlevel?: number;
+};
+
+type MouseEventName =
   | 'click'
   | 'dblclick'
-  | 'mousewheel'
   | 'mouseout'
   | 'mouseover'
   | 'mouseup'
   | 'mousedown'
   | 'mousemove'
   | 'contextmenu'
+  | 'globalout';
+
+type ElementEventName =
+  | MouseEventName
+  | 'mousewheel'
   | 'drag'
   | 'dragstart'
   | 'dragend'
   | 'dragenter'
   | 'dragleave'
   | 'dragover'
-  | 'drop'
-  | 'globalout';
+  | 'drop';
+
+type ZRenderEventName = `zr:${ElementEventName}`;
 
 type OtherEventName =
   | 'highlight'
@@ -78,21 +90,19 @@ type OtherEventName =
   | 'brushselected'
   | 'globalcursortaken';
 
-type ZRenderEventName = `zr:${ElementEventName}`;
-
-type ElementEmits = {
-  [key in ElementEventName]: (params: ECElementEvent) => boolean;
-};
-
-type OtherEmits = {
-  [key in OtherEventName]: null;
+type MouseEmits = {
+  [key in MouseEventName]: (params: ECElementEvent) => boolean;
 };
 
 type ZRenderEmits = {
   [key in ZRenderEventName]: (params: ElementEvent) => boolean;
 };
 
-export type Emits = ElementEmits &
+type OtherEmits = {
+  [key in OtherEventName]: null;
+};
+
+export type Emits = MouseEmits &
   OtherEmits & {
     rendered: (params: { elapsedTime: number }) => boolean;
     finished: () => boolean;

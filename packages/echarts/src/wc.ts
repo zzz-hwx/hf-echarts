@@ -1,10 +1,10 @@
+let registered: boolean | null = null;
+
 export const TAG_NAME = 'x-vue-echarts';
 
 export interface EChartsElement extends HTMLElement {
   __dispose: (() => void) | null;
 }
-
-let registered: boolean | null = null;
 
 export function register(): boolean {
   if (registered != null) {

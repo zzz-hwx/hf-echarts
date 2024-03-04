@@ -1,24 +1,23 @@
-import {
-  computed,
-  inject,
-  watchEffect,
-  type InjectionKey,
-  type Ref,
-} from 'vue-demi';
-import { EChartsType } from '../types';
 import { unwrapInjected } from '../utils';
+import {
+  inject,
+  computed,
+  watchEffect,
+  type Ref,
+  type InjectionKey,
+  type PropType,
+} from 'vue-demi';
+import type { EChartsType, LoadingOptions } from '../types';
 
 export const LOADING_OPTIONS_KEY =
   'ecLoadingOptions' as unknown as InjectionKey<
-    UnknownRecord | Ref<UnknownRecord>
+    LoadingOptions | Ref<LoadingOptions>
   >;
-
-type UnknownRecord = Record<string, unknown>;
 
 export function useLoading(
   chart: Ref<EChartsType | undefined>,
   loading: Ref<boolean>,
-  loadingOptions: Ref<UnknownRecord | undefined>,
+  loadingOptions: Ref<LoadingOptions | undefined>,
 ): void {
   const defaultLoadingOptions = inject(LOADING_OPTIONS_KEY, {});
   const realLoadingOptions = computed(() => ({
@@ -41,6 +40,15 @@ export function useLoading(
 }
 
 export const loadingProps = {
+  /**
+   * 图表是否处于加载状态
+   * 默认值：false
+   */
   loading: Boolean,
-  loadingOptions: Object,
+  /**
+   * 加载动画配置项
+   * 请参考 echartsInstance.showLoading 的 opts 参数
+   * Inject 键名：LOADING_OPTIONS_KEY
+   */
+  loadingOptions: Object as PropType<LoadingOptions>,
 };

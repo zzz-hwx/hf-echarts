@@ -1,73 +1,110 @@
 import {
-  computed,
   defineComponent,
-  getCurrentInstance,
-  h,
-  inject,
-  nextTick,
-  isVue2,
-  isVue3,
-  onBeforeUnmount,
-  onMounted,
   shallowRef,
   toRefs,
   watch,
+  computed,
+  inject,
+  onMounted,
+  onBeforeUnmount,
+  h,
+  nextTick,
   watchEffect,
+  getCurrentInstance,
+  Vue2,
   type PropType,
   type InjectionKey,
 } from 'vue-demi';
+import { init as initChart } from 'echarts/core';
 import type {
   EChartsType,
   EventTarget,
-  Emits,
+  Option,
+  Theme,
+  ThemeInjection,
   InitOptions,
   InitOptionsInjection,
-  Option,
-  ThemeInjection,
   UpdateOptions,
   UpdateOptionsInjection,
+  Emits,
 } from './types';
-import { omitOn, unwrapInjected } from './utils';
-import { EChartsElement, TAG_NAME, register } from './wc';
 import {
-  autoresizeProps,
-  loadingProps,
-  useAutoresize,
-  useLoading,
   usePublicAPI,
+  useAutoresize,
+  autoresizeProps,
+  useLoading,
+  loadingProps,
 } from './composables';
-import { init as initChart } from 'echarts/core';
+import { omitOn, unwrapInjected } from './utils';
+import { register, TAG_NAME, type EChartsElement } from './wc';
 
 // 绕过 tsc 导出到temp下没有包含css文件
 // import './style.css';
 
-const wcRegistered = register();
+const __CSP__ = false;
+const wcRegistered = __CSP__ ? false : register();
 
+if (Vue2) {
+  Vue2.config.ignoredElements.push(TAG_NAME);
+}
 
 export const THEME_KEY = 'ecTheme' as unknown as InjectionKey<ThemeInjection>;
 export const INIT_OPTIONS_KEY =
   'ecInitOptions' as unknown as InjectionKey<InitOptionsInjection>;
 export const UPDATE_OPTIONS_KEY =
   'ecUpdateOptions' as unknown as InjectionKey<UpdateOptionsInjection>;
+export { LOADING_OPTIONS_KEY } from './composables';
 
 export default defineComponent({
-  name: 'echarts',
+  name: 'VChart',
   props: {
-    option: Object as PropType<Option>,
-    theme: {
-      type: [Object, String] as PropType<Option>,
-    },
+    /**
+     * 初始化附加参数
+     * 请参考 echarts.init 的 opts 参数
+     * Inject 键名：INIT_OPTIONS_KEY
+     */
     initOptions: Object as PropType<InitOptions>,
+    /**
+     * 要应用的主题
+     * 请参考 echarts.init 的 theme 参数
+     * Inject 键名：THEME_KEY
+     */
+    theme: {
+      type: [Object, String] as PropType<Theme>,
+    },
+    /**
+     * ECharts 的万能接口
+     * 修改这个 prop 会触发 ECharts 实例的 setOption 方法
+     * 💡在没有指定 update-options 时，如果直接修改 option 对象而引用保持不变，setOption 方法调用时将默认指定 notMerge: false；
+     * 💡否则，如果为 option 绑定一个新的引用，将指定 notMerge: true。
+     */
+    option: Object as PropType<Option>,
+    /**
+     * 图表更新的配置项
+     * 请参考 echartsInstance.setOption 的 opts 参数
+     * Inject 键名：UPDATE_OPTIONS_KEY
+     */
     updateOptions: Object as PropType<UpdateOptions>,
+    /**
+     * 图表的分组，用于联动
+     * echartsInstance.group
+     */
     group: String,
+    /**
+     * 在性能敏感（数据量很大）的场景下，我们最好对于 option prop 绕过 Vue 的响应式系统。
+     * 当将 manual-update prop 指定为 true 且不传入 option prop 时，数据将不会被监听。
+     * 然后，需要用 ref 获取组件实例以后手动调用 setOption 方法来更新图表。
+     * 默认值false
+     */
     manualUpdate: Boolean,
     ...autoresizeProps,
     ...loadingProps,
   },
-  emits: [] as unknown as Emits,
+  emits: {} as unknown as Emits,
   inheritAttrs: false,
   setup(props, { attrs }) {
     const root = shallowRef<EChartsElement>();
+    const inner = shallowRef<HTMLElement>();
     const chart = shallowRef<EChartsType>();
     const manualOption = shallowRef<Option>();
     const defaultTheme = inject(THEME_KEY, null);
@@ -94,12 +131,12 @@ export default defineComponent({
     const listeners = getCurrentInstance().proxy.$listeners;
 
     function init(option?: Option) {
-      if (!root.value) {
+      if (!inner.value) {
         return;
       }
 
       const instance = (chart.value = initChart(
-        root.value,
+        inner.value,
         realTheme.value,
         realInitOptions.value,
       ));
@@ -229,7 +266,9 @@ export default defineComponent({
                 init();
               } else {
                 chart.value.setOption(option, {
-                  notMerge: option.value !== oldOption?.value,
+                  // mutating `option` will lead to `notMerge: false` and
+                  // replacing it with new reference will lead to `notMerge: true`
+                  notMerge: option !== oldOption,
                   ...realUpdateOptions.value,
                 });
               }
@@ -264,7 +303,7 @@ export default defineComponent({
 
     useLoading(chart, loading, loadingOptions);
 
-    useAutoresize(chart, autoresize, root);
+    useAutoresize(chart, autoresize, inner);
 
     onMounted(() => {
       init();
@@ -281,36 +320,33 @@ export default defineComponent({
         cleanup();
       }
     });
-    
+
     return {
       chart,
       root,
+      inner,
       setOption,
       nonEventAttrs,
-      ...publicApi
+      ...publicApi,
     };
   },
   render() {
     // Vue 3 and Vue 2 have different vnode props format:
     // See https://v3-migration.vuejs.org/breaking-changes/render-function-api.html#vnode-props-format
-
-    console.log('test', isVue2, isVue3);
-
     const attrs = (
-      isVue2 ? { attrs: this.nonEventAttrs } : { ...this.nonEventAttrs }
+      Vue2 ? { attrs: this.nonEventAttrs } : { ...this.nonEventAttrs }
     ) as any;
     attrs.ref = 'root';
     attrs.class = attrs.class ? ['echarts'].concat(attrs.class) : 'echarts';
     // 绕过 tsc 导出到temp下没有包含css文件
-    attrs.style = 'display: block; width: 100%; height: 100%; min-width: 0;';
-    return h(TAG_NAME, attrs, '一行文字呀');
+    attrs.style =
+      'display: flex; flex-direction: column; width: 100%; height: 100%; min-width: 0;';
+    return h(TAG_NAME, attrs, [
+      h('div', {
+        ref: 'inner',
+        class: 'vue-echarts-inner',
+        style: 'flex-grow: 1; min-width: 0;',
+      }),
+    ]);
   },
 });
-
-// import {
-//   isVue2,
-//   isVue3,
-// } from 'vue-demi';
-// export default function test() {
-//   console.log('test', isVue2, isVue3);
-// }
