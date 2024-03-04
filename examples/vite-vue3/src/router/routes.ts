@@ -11,9 +11,25 @@ type Route = {
 const data: Route[] = [
   {
     path: '/',
-    component: () => import('@/views/test/table.vue'),
     meta: { icon: 'house', title: '测试' },
+    component: () => import('@/views/test/table.vue'),
   },
+  // {
+  //   path: '/test',
+  //   meta: { icon: 'house', title: '测试' },
+  //   children: [
+  //     {
+  //       path: '/test/table',
+  //       component: () => import('@/views/test/table.vue'),
+  //       meta: { icon: 'memo', title: '表格table' },
+  //     },
+  //     {
+  //       path: '/test/chart',
+  //       component: () => import('@/views/test/chart.vue'),
+  //       meta: { icon: 'data-line', title: '图表 chart' },
+  //     },
+  //   ],
+  // },
   {
     path: '/line',
     meta: { icon: 'lock', title: '折线图' },
@@ -61,23 +77,23 @@ const data: Route[] = [
         component: () => import('@/views/pie/index.vue'),
         meta: { title: '饼图' },
       },
-    ]
+    ],
   },
   {
     path: '/scatter',
     meta: { icon: 'lock', title: '散点图' },
-    children: []
+    children: [],
   },
   {
     path: '/radar',
     meta: { icon: 'lock', title: '雷达图' },
-    children: []
+    children: [],
   },
   {
     path: '/gauge',
     meta: { icon: 'lock', title: '仪表盘' },
-    children: []
-  }
+    children: [],
+  },
 ];
 
 /**

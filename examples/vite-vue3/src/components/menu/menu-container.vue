@@ -41,7 +41,7 @@ import SubMenu from './sub-menu.vue';
 import { menuData } from '@/router/routes';
 
 const defaultOpeneds = ref(['/line']);
-const defaultActive = '/';
+const defaultActive = '/test/table';
 </script>
 
 <style lang="scss" scoped>
@@ -60,6 +60,10 @@ const defaultActive = '/';
       height: 100%;
       right: 20px;
     }
+  }
+
+  & > .el-container {
+    height: 0;
   }
 
   .el-aside {
