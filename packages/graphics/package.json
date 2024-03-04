@@ -1,0 +1,37 @@
+{
+  "name": "@hf/graphics",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "module": "dist/graphics.esm-bundler.js",
+  "types": "dist/graphics.d.ts",
+  "unpkg": "dist/graphics.global.js",
+  "jsdelivr": "dist/graphics.global.js",
+  "files": [
+    "index.js",
+    "dist"
+  ],
+  "sideEffects": false,
+  "buildOptions": {
+    "name": "HfGraphics",
+    "formats": [
+      "cjs",
+      "esm-bundler",
+      "global"
+    ],
+    "external": [
+      "vue-demi",
+      "echarts/core"
+    ]
+  },
+  "keywords": [
+    "echarts",
+    "vue"
+  ],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@hf/echarts": "workspace:^1.0.0",
+    "@hf/shared": "workspace:^1.0.0"
+  }
+}
