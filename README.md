@@ -83,3 +83,14 @@ npm run build
 根目录 项目运行：`npm run example:dev:3`
 修改文件 根目录 打包编译：`npm run build`
 > 添加 watch ？
+
+## 记录
+
+> 参考
+>
+> vue3 源码：https://github.com/vuejs/core
+>
+> vue-echarts 源码：https://github.com/ecomfe/vue-echarts
+>
+> element-plus 源码：https://github.com/element-plus/element-plus
+
