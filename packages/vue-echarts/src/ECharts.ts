@@ -35,7 +35,7 @@ import {
   useLoading,
   loadingProps,
 } from './composables';
-import { omitOn, unwrapInjected } from './utils';
+import { attrsToProps, omitOn, unwrapInjected } from './utils';
 import { register, TAG_NAME, type EChartsElement } from './wc';
 
 // 绕过 tsc 导出到temp下没有包含css文件
@@ -331,11 +331,7 @@ export default defineComponent({
     };
   },
   render() {
-    // Vue 3 and Vue 2 have different vnode props format:
-    // See https://v3-migration.vuejs.org/breaking-changes/render-function-api.html#vnode-props-format
-    const attrs = (
-      Vue2 ? { attrs: this.nonEventAttrs } : { ...this.nonEventAttrs }
-    ) as any;
+    const attrs = attrsToProps(this.nonEventAttrs);
     attrs.ref = 'root';
     attrs.class = attrs.class ? ['echarts'].concat(attrs.class) : 'echarts';
     // 绕过 tsc 导出到temp下没有包含css文件

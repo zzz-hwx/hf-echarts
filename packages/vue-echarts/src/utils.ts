@@ -1,4 +1,4 @@
-import { type MaybeRef, unref } from 'vue-demi';
+import { type MaybeRef, unref, Vue2 } from 'vue-demi';
 import type { Injection } from './types';
 
 type Attrs = {
@@ -20,6 +20,19 @@ export function omitOn(attrs: Attrs): Attrs {
   }
 
   return result;
+}
+
+/**
+ * 从 attrs 生成h函数的第2个参数 props
+ * @param attrs
+ * @returns
+ */
+export function attrsToProps(attrs: Attrs): any {
+  // Vue 3 and Vue 2 have different vnode props format:
+  // See https://v3-migration.vuejs.org/breaking-changes/render-function-api.html#vnode-props-format
+  // See https://v3-migration.vuejs.org/zh/breaking-changes/render-function-api.html#vnode-prop-%E6%A0%BC%E5%BC%8F%E5%8C%96
+  const props = (Vue2 ? { attrs: attrs } : { ...attrs }) as any;
+  return props;
 }
 
 export function unwrapInjected<T, V>(
