@@ -1,12 +1,12 @@
 {
-  "name": "@hf/echarts",
+  "name": "@hf/vue-echarts",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "module": "dist/echarts.esm-bundler.js",
-  "types": "dist/echarts.d.ts",
-  "unpkg": "dist/echarts.global.js",
-  "jsdelivr": "dist/echarts.global.js",
+  "module": "dist/vue-echarts.esm-bundler.js",
+  "types": "dist/vue-echarts.d.ts",
+  "unpkg": "dist/vue-echarts.global.js",
+  "jsdelivr": "dist/vue-echarts.global.js",
   "files": [
     "index.js",
     "dist"

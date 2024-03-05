@@ -15,7 +15,7 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { isArray } from '@hf/shared';
-// import HfChart from '@hf/echarts';
+// import HfChart from '@hf/vue-echarts';
 
 defineProps<{ msg: string }>()
 

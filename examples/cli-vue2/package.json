@@ -7,7 +7,7 @@
     "build": "vue-cli-service build"
   },
   "dependencies": {
-    "@hf/echarts": "workspace:^1.0.0",
+    "@hf/vue-echarts": "workspace:^1.0.0",
     "@hf/shared": "workspace:^1.0.0"
   },
   "devDependencies": {

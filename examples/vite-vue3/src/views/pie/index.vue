@@ -12,7 +12,7 @@ import {
   TooltipComponent,
   LegendComponent,
 } from 'echarts/components';
-import VChart, { THEME_KEY } from '@hf/echarts';
+import VChart, { THEME_KEY } from '@hf/vue-echarts';
 import { ref, provide } from 'vue';
 
 use([

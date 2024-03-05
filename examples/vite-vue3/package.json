@@ -9,11 +9,12 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@hf/echarts": "workspace:^1.0.0",
+    "@hf/vue-echarts": "workspace:^1.0.0",
     "@hf/shared": "workspace:^1.0.0"
   },
   "devDependencies": {
     "@element-plus/icons-vue": "^2.3.1",
+    "echarts": "^5.5.0",
     "element-plus": "^2.5.6",
     "pinia": "^2.1.7",
     "sass": "^1.71.1",

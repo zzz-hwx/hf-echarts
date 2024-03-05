@@ -301,7 +301,7 @@
 <script>
 /* eslint-disable no-console */
 import qs from "qs";
-import VChart from "@hf/echarts";
+import VChart from "@hf/vue-echarts";
 
 import {
   use,

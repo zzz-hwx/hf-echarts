@@ -9,7 +9,7 @@
 </template>
 
 <script>
-import HfChart from '@hf/echarts';
+import HfChart from '@hf/vue-echarts';
 
 export default {
   components: {
