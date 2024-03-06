@@ -65,8 +65,13 @@ function createConfig(format, output) {
       globals: {
         vue: 'vue',
         'vue-demi': 'vueDemi',
+        echarts: 'echarts',
         'echarts/core': 'echarts/core',
+        'echarts/renderers': 'echarts/renderers',
+        'echarts/charts': 'echarts/charts',
+        'echarts/components': 'echarts/components',
         'resize-detector': 'resizeDetector',
+        'lodash-es': 'lodash-es',
       },
     },
     // external: ['vue', 'vue-demi'],

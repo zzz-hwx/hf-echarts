@@ -21,7 +21,12 @@
     ],
     "external": [
       "vue-demi",
-      "echarts/core"
+      "echarts",
+      "echarts/core",
+      "echarts/renderers",
+      "echarts/charts",
+      "echarts/components",
+      "lodash-es"
     ]
   },
   "keywords": [

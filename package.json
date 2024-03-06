@@ -12,17 +12,17 @@
     "example:dev:3": "npm run use-vue:3 && npm -C examples/vite-vue3 run dev",
     "use-vue:2": "vue-demi-switch 2 vue2",
     "use-vue:3": "vue-demi-switch 3",
-    "test": "tsc -p tsconfig.build.json"
+    "test": "node scripts/build.js"
   },
   "dependencies": {
-    "lodash": "^4.17.21",
+    "lodash-es": "^4.17.21",
     "resize-detector": "^0.3.0",
     "vue-demi": "^0.14.7"
   },
   "devDependencies": {
     "@rollup/plugin-json": "^6.1.0",
     "@rollup/plugin-node-resolve": "^15.2.3",
-    "@types/lodash": "^4.14.202",
+    "@types/lodash-es": "^4.17.12",
     "@typescript-eslint/eslint-plugin": "^7.0.2",
     "@typescript-eslint/parser": "^7.0.2",
     "@vitejs/plugin-vue": "^5.0.4",

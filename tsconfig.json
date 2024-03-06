@@ -24,9 +24,7 @@
     "paths": {
       "@vue/compat": ["packages/vue-compat/src"],
       "@vue/*": ["packages/*/src"],
-      "vue": ["packages/vue/src"],
-      // 临时代码...先...这样写
-      "@/*": ["examples/vite-vue3/src/*"]
+      "vue": ["packages/vue/src"]
     }
   },
   "include": [
