@@ -1,39 +1,37 @@
 <template>
-  <div>柱状图 基础用法</div>
+  <h1>基础用法</h1>
   <div class="chart">
-    <v-chart :option="option" autoresize></v-chart>
+    <hf-bar :data="data" autoresize></hf-bar>
   </div>
 </template>
 
 <script lang="ts" setup>
-import { use } from 'echarts/core';
-import { CanvasRenderer } from 'echarts/renderers';
-import { BarChart } from 'echarts/charts';
-import { GridComponent, LegendComponent, TooltipComponent } from 'echarts/components';
-import VChart from '@hf/vue-echarts';
+import { HfBar } from '@hf/graphics';
 import { ref } from 'vue';
 
-use([
-  CanvasRenderer,
-  BarChart,
-  GridComponent,
-  LegendComponent,
-  TooltipComponent,
-]);
-
-const option = ref({
-  tooltip: {},
-  legend: {},
-  xAxis: {
-    data: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]
+const data = ref([
+  {
+    name: "A级门店",
+    itemData: [
+      { name: "福建", value: "211" },
+      { name: "广州", value: "223" }
+    ]
   },
-  yAxis: {},
-  series: [{
-    name: "Sale",
-    type: "bar",
-    data: [5, 20, 36, 10, 10, 20, 4]
-  }]
-});
+  {
+    name: "B级门店",
+    itemData: [
+      { name: "福建", value: "212" },
+      { name: "广州", value: "145" }
+    ]
+  },
+  {
+    name: "C级门店",
+    itemData: [
+      { name: "福建", value: "112" },
+      { name: "广州", value: "245" }
+    ]
+  }
+]);
 </script>
 
 <style scoped>

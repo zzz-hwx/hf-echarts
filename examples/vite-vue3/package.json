@@ -9,8 +9,9 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@hf/vue-echarts": "workspace:^1.0.0",
-    "@hf/shared": "workspace:^1.0.0"
+    "@hf/graphics": "workspace:^1.0.0",
+    "@hf/shared": "workspace:^1.0.0",
+    "@hf/vue-echarts": "workspace:^1.0.0"
   },
   "devDependencies": {
     "@element-plus/icons-vue": "^2.3.1",

@@ -51,6 +51,16 @@ const data: Route[] = [
         meta: { title: '基础用法' },
       },
       {
+        path: '/bar/dataZoom',
+        component: () => import('@/views/bar/dataZoom.vue'),
+        meta: { title: '缩放' },
+      },
+      {
+        path: '/bar/vchart',
+        component: () => import('@/views/bar/vchart.vue'),
+        meta: { title: 'vchart用法' },
+      },
+      {
         path: '/bar/horizontal',
         meta: { icon: 'lock', title: '横向条形图' },
         children: [
